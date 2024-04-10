@@ -68,7 +68,7 @@
         "id": "bedca4c12eef79c0",
         "type": "exec",
         "z": "207805754c0a9258",
-        "command": "/home/vaidas/Documents/llama2/bin/python -u /home/vaidas/documents/llama2.py \"",
+        "command": "/home/vaidas/Documents/llama2/bin/python -u /home/vaidas/Documents/llama2.py \"",
         "addpay": "payload",
         "append": "\"",
         "useSpawn": "false",
