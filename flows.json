@@ -71,7 +71,7 @@
         "command": "/home/vaidas/Documents/llama2/bin/python -u /home/vaidas/Documents/llama2.py \"",
         "addpay": "payload",
         "append": "\"",
-        "useSpawn": "false",
+        "useSpawn": "True",
         "timer": "",
         "winHide": false,
         "oldrc": false,
