@@ -86,6 +86,28 @@
             []
         ]
     },
+      {
+        "id": "a766654bfe6808ff",  
+        "type": "exec",
+        "z": "207805754c0a9258", 
+        "command": "/home/vaidas/au2txt.py",
+        "addpay": false,  
+        "append": "",
+        "useSpawn": "false", 
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Record and Convert Audio",
+        "x": 240, 
+        "y": 280, 
+        "wires": [
+            [
+                "7a9303cc87bfd986"  
+            ],
+            [],
+            []
+        ]
+    },
     {
         "id": "6e511a34810f72b2",
         "type": "ui-template",
@@ -259,5 +281,32 @@
                 "de73754bc4043f06"
             ]
         ]
-    }
+    },
+    {
+    "id": "bcde12345678abcd",  
+    "type": "ui-button",
+    "z": "207805754c0a9258", 
+    "group": "a76153676feaf33d", 
+    "name": "",
+    "label": "Record",
+    "order": 1, 
+    "width": 0,  
+    "height": 0, 
+    "passthru": true,
+    "tooltip": "",
+    "color": "",
+    "bgcolor": "",
+    "className": "",
+    "icon": "microphone ", 
+    "payload": "",
+    "payloadType": "str",
+    "topic": "",
+    "x": 240, 
+    "y": 220, 
+    "wires": [
+        [
+            "a766654bfe6808ff"  
+        ]
+    ]
+}
 ]
