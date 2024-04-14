@@ -282,31 +282,25 @@
             ]
         ]
     },
-    {
-    "id": "bcde12345678abcd",  
-    "type": "ui-button",
+   {
+    "id": "record_and_transcribe", 
+    "type": "function",
+    "z": "207805754c0a9258",
+    "name": "Record and Transcribe",
+    "func": "// ... Paste JavaScript function code here ...", 
+    "outputs": 3,
+    "wires": [
+      ["6e511a34810f72b2"], // 1st output -> Chat Display (User)
+      ["6e511a34810f72b2"], // 2nd output -> Chat Display (Llama)
+      ["recording_indicator"] // 3rd output -> Recording Indicator (Optional)
+    ]
+  },
+  {
+    "id": "recording_indicator",
+    "type": "ui-text", // Or use 'ui-led' 
     "z": "207805754c0a9258", 
     "group": "a76153676feaf33d", 
-    "name": "",
-    "label": "Record",
-    "order": 1, 
-    "width": 0,  
-    "height": 0, 
-    "passthru": true,
-    "tooltip": "",
-    "color": "",
-    "bgcolor": "",
-    "className": "",
-    "icon": "microphone ", 
-    "payload": "",
-    "payloadType": "str",
-    "topic": "",
-    "x": 240, 
-    "y": 220, 
-    "wires": [
-        [
-            "a766654bfe6808ff"  
-        ]
-    ]
-}
+    "name": "Recording Indicator",
+    // ... Add other configuration properties for this node here ... 
+  }
 ]
