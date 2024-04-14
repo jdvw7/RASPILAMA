@@ -7,21 +7,25 @@
         "info": "",
         "env": []
     },
-  {
-  "id": "987b1234abcd56ef",
-  "type": "button",
-  "z": "207805754c0a9258",
-  "name": "Record and Talk to AI",
-  "label": "Record and Talk to AI",
+ {
+  "id": "34d5915e804ab616",  
+  "type": "ui-button",
+  "z": "207805754c0a9258",  
+  "group": "a76153676feaf33d", 
+  "name": "Record and Talk to AI", 
+  "label": "Record and Talk to AI",  
+  "order": 0, 
+  "width": "1", 
+  "height": "1", 
+  "passthru": true,
   "topic": "record_trigger", 
+  "topicType": "str", 
   "payload": "", 
   "payloadType": "str",
-  "tta": true,
-  "deg": "0",  
   "x": 250,  
-  "y": 350, 
+  "y": 350,  
   "wires": [
-     [ "a735b336d1f537d9" ]
+     [ "a735b336d1f537d9" ] 
   ] 
 },
     {
