@@ -115,8 +115,7 @@
     "name": "",
     "label": "Record",
     "order": 0,  
-    // ... Add other button properties ...
-    "x": 220, // Adjust coordinates as needed
+    "x": 220,
     "y": 120, 
     "wires": [
             [
