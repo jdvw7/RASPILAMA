@@ -68,10 +68,10 @@
         "id": "bedca4c12eef79c0",
         "type": "exec",
         "z": "207805754c0a9258",
-        "command": "/home/vaidas/llama2/bin/python -u /home/vaidas/llama2.py \"",
+        "command": "/home/vaidas/Documents/llama2/bin/python -u /home/vaidas/Documents/llama2.py \"",
         "addpay": "payload",
         "append": "\"",
-        "useSpawn": "True",
+        "useSpawn": "false",
         "timer": "",
         "winHide": false,
         "oldrc": false,
@@ -81,28 +81,6 @@
         "wires": [
             [
                 "7a9303cc87bfd986"
-            ],
-            [],
-            []
-        ]
-    },
-      {
-        "id": "a766654bfe6808ff",  
-        "type": "exec",
-        "z": "207805754c0a9258", 
-        "command": "/home/vaidas/au2txt.py",
-        "addpay": false,  
-        "append": "",
-        "useSpawn": "false", 
-        "timer": "",
-        "winHide": false,
-        "oldrc": false,
-        "name": "Record and Convert Audio",
-        "x": 240, 
-        "y": 280, 
-        "wires": [
-            [
-                "7a9303cc87bfd986"  
             ],
             [],
             []
@@ -281,91 +259,5 @@
                 "de73754bc4043f06"
             ]
         ]
-    },
-   {
-    "id": "record_and_transcribe", 
-    "type": "function",
-    "z": "207805754c0a9258",
-    "name": "Record and Transcribe",
-    "func": // Inside the Function Node
-const fs = global.get('fs'); // Access Node-RED's filesystem 
-
-from transformers.pipelines.audio_utils import ffmpeg_microphone_live
-from transformers import pipeline
-import sounddevice as sd
-import soundfile as sf
-import numpy as np
-from langchain_community.llms import LlamaCpp  # Not used in this code
-from langchain.prompts import PromptTemplate  # Not used in this code
-from langchain.schema.output_parser import StrOutputParser  # Not used in this code
-from llama_cpp import Llama
-
-# Initialize Whisper ASR model
-asr_model_id = "openai/whisper-tiny.en"
-transcriber = pipeline("automatic-speech-recognition", model=asr_model_id, device="cpu")
-
-
-# Function to record audio from the microphone
-def record_audio(duration=5, samplerate=16000):
-  print("Recording...")
-  recording = sd.rec(int(duration * samplerate), samplerate=samplerate, channels=1, dtype='float32')
-  sd.wait()
-  print("Recording stopped.")
-  return recording.flatten()
-
-# Function to save the recorded audio to a file
-def save_audio(recording, filename="recording.wav", samplerate=16000):
-  sf.write(filename, recording, samplerate)
-  print(f"Audio saved to {filename}")
-
-# Transcribe audio using Whisper
-def transcribe_audio(filename="recording.wav"):
-  transcription = transcriber(filename)
-  return transcription['text']
-
-# Function to generate response using Llama
-def generate_llama_response(transcribed_text):
-  # Load the Llama model
-  llm = Llama(model_path="tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf", verbose=False)
-
-  # Generate response using transcribed text
-  output = llm("<user>\n" + transcribed_text + "\n<assistant>\n", max_tokens=40)
-  print(output['choices'][0]["text"] + "...")
-
-# Main execution
-if __name__ == "__main__":
-  # Record audio
-  recorded_audio = record_audio()
- 
-  # Save audio (optional)
-  save_audio(recorded_audio)
- 
-  # Transcribe audio
-  transcribed_text = transcribe_audio()
-  print(f"Transcription: {transcribed_text}")
-
-  # Generate Llama response
-  generate_llama_response(transcribed_text)
-
-// Send messages to UI nodes (adjust selectors and data structure as needed)
-return [
-    { payload: { type: 'chat', role: 'user', content: transcribedText }},
-    { payload: { type: 'chat', role: 'bot', content: llamaResponse }},
-    { payload: 'recording_stopped' } // Optional signal to reset UI 
-]; 
-    "outputs": 3,
-    "wires": [
-      ["6e511a34810f72b2"], // 1st output -> Chat Display (User)
-      ["6e511a34810f72b2"], // 2nd output -> Chat Display (Llama)
-      ["recording_indicator"] // 3rd output -> Recording Indicator (Optional)
-    ]
-  },
-  {
-    "id": "recording_indicator",
-    "type": "ui-text", // Or use 'ui-led' 
-    "z": "207805754c0a9258", 
-    "group": "a76153676feaf33d", 
-    "name": "Recording Indicator",
-    // ... Add other configuration properties for this node here ... 
-  }
+    }
 ]
