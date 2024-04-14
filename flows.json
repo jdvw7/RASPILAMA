@@ -68,12 +68,14 @@
         "id": "bedca4c12eef79c0",
         "type": "exec",
         "z": "207805754c0a9258",
-        "command": "home/vaidas/python -u /home/vaidas/au2txt.py",
+        "command": "/home/pi/llama2/bin/python -u /home/pi/llama2.py \"",
+        "addpay": "payload",
+        "append": "\"",
         "useSpawn": "false",
         "timer": "",
         "winHide": false,
         "oldrc": false,
-        "name": "au2txt.py",
+        "name": "llama2.py",
         "x": 360,
         "y": 60,
         "wires": [
@@ -82,6 +84,44 @@
             ],
             [],
             []
+        ]
+    },
+    {
+        "id": "a735b336d1f537d9",
+        "type": "exec",
+        "z": "207805754c0a9258",
+        "name": "Run Audio Script",
+        "command": "python /home/vaidas/au2txt.py",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "x": 200,
+        "y": 250,
+        "wires": [
+            [
+                "b788d668d345f86e"
+            ]
+        ]
+    },
+    {
+        "id": "b788d668d345f86e",
+        "type": "function",
+        "z": "207805754c0a9258",
+        "name": "Parse Output",
+        "func": "const execOutput = msg.payload; // Assuming exec node output is in msg.payload\n\n// Split the output into transcript and response \nconst parts = execOutput.split(\"TinyLlama Response:\");\n\n// Extract the transcript (assuming it comes before the response)\nconst transcript = parts[0].replace(\"Transcript: \", \"\").trim(); \n\n// Extract the TinyLlama response \nconst tinyLlamaResponse = parts[1].trim();\n\n// Add transcript to existing flow for \"add user comment\" function\n// ...  (You'll need to modify this depending on how you pass data to your comment function)\n\n// Prepare TinyLlama response for output \nmsg.payload = tinyLlamaResponse;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 300,
+        "wires": [
+            "7a9303cc87bfd986"
         ]
     },
     {
@@ -109,17 +149,50 @@
         ]
     },
     {
-"type": "ui-button",
-    "z": "207805754c0a9258",
-    "group": "a76153676feaf33d",
-    "name": "",
-    "label": "Record",
-    "order": 0,  
-    "x": 220,
-    "y": 120, 
-    "wires": [
+        "id": "88700a769c7da507",
+        "type": "ui-text-input",
+        "z": "207805754c0a9258",
+        "group": "a76153676feaf33d",
+        "name": "",
+        "label": "prompt",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "topic": "topic",
+        "topicType": "msg",
+        "mode": "text",
+        "delay": 300,
+        "passthru": true,
+        "sendOnDelay": false,
+        "sendOnBlur": true,
+        "sendOnEnter": true,
+        "className": "",
+        "x": 220,
+        "y": 120,
+        "wires": [
             [
+                "76ad0adab97f0adc",
                 "bedca4c12eef79c0"
+            ]
+        ]
+    },
+    {
+        "id": "76ad0adab97f0adc",
+        "type": "function",
+        "z": "207805754c0a9258",
+        "name": "add user comment",
+        "func": "var tmp = flow.get('data') || [];\ntmp.push({ image: \"https://nodered.jp/images/yokoi.jpg\", message: msg.payload });\nflow.set('data', tmp);\nmsg.payload = tmp;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 120,
+        "wires": [
+            [
+                "6e511a34810f72b2"
             ]
         ]
     },
