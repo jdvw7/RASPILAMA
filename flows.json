@@ -68,14 +68,12 @@
         "id": "bedca4c12eef79c0",
         "type": "exec",
         "z": "207805754c0a9258",
-        "command": "/home/vaidas/Documents/llama2/bin/python -u /home/vaidas/Documents/llama2.py \"",
-        "addpay": "payload",
-        "append": "\"",
+        "command": "home/vaidas/python -u /home/vaidas/au2txt.py",
         "useSpawn": "false",
         "timer": "",
         "winHide": false,
         "oldrc": false,
-        "name": "llama2.py",
+        "name": "au2txt.py",
         "x": 360,
         "y": 60,
         "wires": [
@@ -111,50 +109,18 @@
         ]
     },
     {
-        "id": "88700a769c7da507",
-        "type": "ui-text-input",
-        "z": "207805754c0a9258",
-        "group": "a76153676feaf33d",
-        "name": "",
-        "label": "prompt",
-        "order": 0,
-        "width": 0,
-        "height": 0,
-        "topic": "topic",
-        "topicType": "msg",
-        "mode": "text",
-        "delay": 300,
-        "passthru": true,
-        "sendOnDelay": false,
-        "sendOnBlur": true,
-        "sendOnEnter": true,
-        "className": "",
-        "x": 220,
-        "y": 120,
-        "wires": [
+"type": "ui-button",
+    "z": "207805754c0a9258",
+    "group": "a76153676feaf33d",
+    "name": "",
+    "label": "Record",
+    "order": 0,  
+    // ... Add other button properties ...
+    "x": 220, // Adjust coordinates as needed
+    "y": 120, 
+    "wires": [
             [
-                "76ad0adab97f0adc",
                 "bedca4c12eef79c0"
-            ]
-        ]
-    },
-    {
-        "id": "76ad0adab97f0adc",
-        "type": "function",
-        "z": "207805754c0a9258",
-        "name": "add user comment",
-        "func": "var tmp = flow.get('data') || [];\ntmp.push({ image: \"https://nodered.jp/images/yokoi.jpg\", message: msg.payload });\nflow.set('data', tmp);\nmsg.payload = tmp;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 570,
-        "y": 120,
-        "wires": [
-            [
-                "6e511a34810f72b2"
             ]
         ]
     },
